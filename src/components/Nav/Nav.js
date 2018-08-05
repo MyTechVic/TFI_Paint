@@ -7,7 +7,7 @@ class Navigation extends React.Component {
     return (
 	      <div>
 	        <Navbar color="light" light expand="md">
-	          <NavbarBrand href="/"> <img src={logo} alt="Logo" />; </NavbarBrand>
+	          <NavbarBrand href="/"> <img src={logo} alt="Logo" /> </NavbarBrand>
 	        </Navbar>
 	      </div>
 	    );
