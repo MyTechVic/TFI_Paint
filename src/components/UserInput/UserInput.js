@@ -3,6 +3,49 @@ import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col} f
 import './UserInput.css'
 
 class UserInput extends React.Component {
+ 	constructor(props) {
+    super(props);
+    this.state = {
+      value: ''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.curtainhandleChange = this.curtainhandleChange.bind(this);
+    this.sinagehandleChange = this.sinagehandleChange.bind(this);
+    this.noteshandleChange = this.noteshandleChange.bind(this);
+    this.methodhandleChange = this.methodhandleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  	handleChange(event) {
+    this.setState({value: event.target.value});
+    console.log('company:', event.target.value);
+  }
+
+	curtainhandleChange(event) {
+    this.setState({value: event.target.value});
+    console.log('curtain:', event.target.value);
+  }
+
+  sinagehandleChange(event) {
+    this.setState({value: event.target.value});
+    console.log('sinage:', event.target.value);
+  }
+
+  noteshandleChange(event) {
+    this.setState({value: event.target.value});
+    console.log('notes:', event.target.value);
+  }
+
+  methodhandleChange(event) {
+    this.setState({value: event.target.value});
+    console.log('method:', event.target.value);
+  }
+
+  handleSubmit(event) {
+    alert('An essay was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
 	render() {
 		return(
 		 <Container>	
@@ -14,7 +57,7 @@ class UserInput extends React.Component {
 			         		<Input  type="text" name="text" id="exampleText" placeholder="Company Name" disabled/>
 			         	</Col>
 		         		<Col sm={{size: 6}}>
-			          		<Input type="text" name="text" id="exampleText" placeholder="Company Name" />
+			          		<Input onChange={this.handleChange} type="text" name="text" id="exampleText" placeholder="Company Name" />
 			          	</Col>
 			        </FormGroup>
 		        </Col>
@@ -33,25 +76,25 @@ class UserInput extends React.Component {
 				 	 <Col md='6'>
 				        <FormGroup className='FormGroupsTfi'>
 				          <Label for="exampleText">Curtain Codes</Label>
-				          <Input style={{ height: '200px' }} type="textarea" name="text" id="exampleText" />
+				          <Input onChange={this.curtainhandleChange}  style={{ height: '200px' }} type="textarea" name="text" id="exampleText" />
 				        </FormGroup>
 			        </Col>
 				 	 <Col md='6'>
 				        <FormGroup className='FormGroupsTfi'>
 				          <Label for="exampleText">Sinage Codes</Label>
-				          <Input style={{ height: '200px' }} type="textarea" name="text" id="exampleText" />
+				          <Input onChange={this.sinagehandleChange} style={{ height: '200px' }} type="textarea" name="text" id="exampleText" />
 				        </FormGroup>
 			        </Col>
 				 	 <Col md='6'>
 				        <FormGroup className='FormGroupsTfi'>
 				          <Label for="exampleText">Notes</Label>
-				          <Input style={{ height: '200px' }} type="textarea" name="text" id="exampleText" />
+				          <Input onChange={this.noteshandleChange} style={{ height: '200px' }} type="textarea" name="text" id="exampleText" />
 				        </FormGroup>
 			        </Col>
 				 	 <Col md='6'>
 				        <FormGroup className='FormGroupsTfi'>
 				          <Label for="exampleText">Method</Label>
-				          <Input style={{ height: '200px' }} type="textarea" name="text" id="exampleText" />
+				          <Input onChange={this.methodhandleChange} style={{ height: '200px' }} type="textarea" name="text" id="exampleText" />
 				        </FormGroup>
 			        </Col>
 		        </Row>    
