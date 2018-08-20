@@ -15,29 +15,24 @@ class UserInput extends React.Component {
       Method: ''
     };
   }
-
-
  onChange = (e) => {
         // Because we named the inputs to match their corresponding values in state, it's
         // super easy to update the state
         this.setState({ [e.target.name]: e.target.value });
-        console.log([e.target.name]: e.target.value );
       }
-
       onSubmit = (e) => {
         e.preventDefault();
         // get our form data out of state
         const { companyName, curtainCodes, sinageCodes, Notes, Method  } = this.state;
-        
-        axios.put('http://localhost:3001/saveInfo', {   curtainCodes, sinageCodes, Notes, Method  })
+        console.log(this.state);
+        axios.post(' http://10.1.1.221:3001/saveInfo', {   companyName, curtainCodes, sinageCodes, Notes, Method  })
           .then((result) => {
-          	console.log(companyName);
+          	console.log([e.target.name]: e.target.value );
+      	 	console.log(result);
+    		console.log(result.data);
             //access the results here....
           });
-
       }
-
-
 	render() {
 		return(
 		 <Container>	
