@@ -7,6 +7,7 @@ import axios from 'axios';
 class UserInput extends React.Component {
  	constructor(props) {
     super(props);
+
     this.state = {
       companyName: '',
       curtainCodes: '',
@@ -23,15 +24,24 @@ class UserInput extends React.Component {
       onSubmit = (e) => {
         e.preventDefault();
         // get our form data out of state
-        const { companyName, curtainCodes, sinageCodes, Notes, Method  } = this.state;
+        const tfiInfo = { 
+        	companyName: this.state.name,
+        	curtainCodes: this.state.name,
+        	sinageCodes: this.state.name,
+        	Notes: this.state.name,
+        	Method: this.state.name
+    	 }
         console.log(this.state);
-        axios.post(' http://10.1.1.221:3001/saveInfo', {   companyName, curtainCodes, sinageCodes, Notes, Method  })
-          .then((result) => {
-          	console.log([e.target.name]: e.target.value );
-      	 	console.log(result);
-    		console.log(result.data);
-            //access the results here....
-          });
+        axios.post(' http://localhost:3001/saveInfo/add', tfiInfo )
+             .then(res => console.log(res.data));
+         	
+         	this.setState({
+            	companyName: '',
+            	curtainCodes: '',
+            	sinageCodes: '',
+            	Notes: '',
+            	Method: ''
+        });
       }
 	render() {
 		return(
