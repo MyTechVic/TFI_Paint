@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Link, Route, Switch, Router } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import Search from './components/Search/Search'	
 import Login from './components/Login/Login'	
-import UserInput from './components/UserInput/UserInput'
-import Navigation from './components/Nav/Nav'
+import Dashboard from './components/Dashboard/Dashboard'	
+
 
 class App extends Component {
 
@@ -14,13 +13,10 @@ class App extends Component {
     return (
 	<div>
     <Switch>
-        <Route exact path='/login' component={Login}/>
+        <Route exact path='/' component={Login}/>
+        <Route exact path='/Dashboard' component={Dashboard}/>
     </Switch>
-		<div className="App">
-			<Navigation />
-			<Search />
-			<UserInput />
-		</div>
+
 		
 
 	</div>

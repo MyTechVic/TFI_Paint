@@ -69,7 +69,7 @@ onSubmit(e){
 			         		<Input value={this.state.companyName}  type="text" name="text"  placeholder="Company Name" disabled/>
 			         	</Col>
 		         		<Col sm={{size: 6}}>
-			          		<Input onChange={this.onChange} type="text" name="companyName"  placeholder="Company Name" />
+			          		<Input value={this.state.companyName} onChange={this.onChange} type="text" name="companyName"  placeholder="Company Name" />
 			          	</Col>
 			        </FormGroup>
 		        </Col>
@@ -78,7 +78,7 @@ onSubmit(e){
 			 	<Row>
 			 		<Col md={{size: 9, offset: 6}} sm={{size: 10, offset:6}}>
 				 		<div className="NewJobButton">
-		    				<Button outline color="info" onClick={this.resetName}>New Job</Button>{' '}
+		    				<Button className='New_button' outline color="info" onClick={this.resetName}>New Job</Button>{' '}
 				 		</div>
 			 		</Col>
 			 	</Row>
@@ -87,25 +87,25 @@ onSubmit(e){
 				 	 <Col md='6'>
 				        <FormGroup className='FormGroupsTfi'>
 				          <Label for="exampleText">Curtain Codes</Label>
-				          <Input onChange={this.onChange}  style={{ height: '200px' }} type="textarea" name="curtainCodes"  />
+				          <Input onChange={this.onChange} value={this.state.curtainCodes}  style={{ height: '200px' }} type="textarea" name="curtainCodes"  />
 				        </FormGroup>
 			        </Col>
 				 	 <Col md='6'>
 				        <FormGroup className='FormGroupsTfi'>
 				          <Label for="exampleText">Sinage Codes</Label>
-				          <Input onChange={this.onChange} style={{ height: '200px' }} type="textarea" name="sinageCodes"  />
+				          <Input onChange={this.onChange} value={this.state.sinageCodes} style={{ height: '200px' }} type="textarea" name="sinageCodes"  />
 				        </FormGroup>
 			        </Col>
 				 	 <Col md='6'>
 				        <FormGroup className='FormGroupsTfi'>
 				          <Label for="exampleText">Notes</Label>
-				          <Input onChange={this.onChange} style={{ height: '200px' }} type="textarea" name="Notes"  />
+				          <Input onChange={this.onChange} value={this.state.Notes} style={{ height: '200px' }} type="textarea" name="Notes"  />
 				        </FormGroup>
 			        </Col>
 				 	 <Col md='6'>
 				        <FormGroup className='FormGroupsTfi'>
 				          <Label for="exampleText">Method</Label>
-				          <Input onChange={this.onChange} style={{ height: '200px' }} type="textarea" name="Method"  />
+				          <Input onChange={this.onChange} value={this.state.Method} style={{ height: '200px' }} type="textarea" name="Method"  />
 				        </FormGroup>
 			        </Col>
 		        </Row>    
@@ -113,7 +113,7 @@ onSubmit(e){
 			<Row>
 				<Col md={{size: 10, offset: 6}} sm={{size: 10, offset:6}}>
 					<div>
-				 		<Button value='submit' outline color="success">Save Job</Button>{' '}
+				 		<Button className='submit_button' value='submit' outline color="success">Save Job</Button>{' '}
 				 	</div>
 			 	</Col>
 		 	</Row>
