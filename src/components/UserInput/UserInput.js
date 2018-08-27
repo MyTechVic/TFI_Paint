@@ -12,13 +12,16 @@ class UserInput extends React.Component {
     this.resetName = this.resetName.bind(this);
 
     this.state = {
+      customerID: '',
       companyName: '',
       curtainCodes: '',
       sinageCodes: '',
       Notes: '',
       Method: '',
-    };
-  }
+    };  
+}
+
+  // create an error alert function to show duplication of new job. 
 
 	onChange = (e) => {
         // Because we named the inputs to match their corresponding values in state, it's
@@ -29,6 +32,7 @@ class UserInput extends React.Component {
 
  	resetName = (event) => {
            	this.setState({
+                customerID:   '',
                 companyName:   '',
                 curtainCodes:   '',
                 sinageCodes:   '',
@@ -43,6 +47,7 @@ onSubmit(e){
 	e.preventDefault();
 	// get our form data out of state
 	const tfiInfo = { 
+		customerID: this.state.customerID,
 		companyName: this.state.companyName,
 		curtainCodes: this.state.curtainCodes,
 		sinageCodes: this.state.sinageCodes,
@@ -63,6 +68,13 @@ onSubmit(e){
 		 <Container>	
 			 <Form>
 			 	<Row>
+			 	 <Col md={{ size: 8}}>
+			        <FormGroup >
+		         		<Col sm={{size: 6}}>
+			          		<Input value={this.state.customerID} onChange={this.onChange} type="text" name="customerID"  placeholder="Customer ID" />
+			          	</Col>
+			        </FormGroup>
+		        </Col>
 			 	 <Col md={{ size: 8}}>
 			        <FormGroup >
 			        	<Col sm={{size: 6}} >

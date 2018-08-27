@@ -19,6 +19,8 @@ class Search extends React.Component {
 
   };
 
+
+
   search = query => {
     const url = `https://swapi.co/api/people?search=${query}`;
     const token = {};
