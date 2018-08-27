@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, Container, Row, Col} from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container, Row, Col,  FormFeedback, FormText,  } from 'reactstrap';
+import { FormErrors } from '../FormErrors/FormErrors';
 import './UserInput.css'
 import axios from 'axios';
 
@@ -18,6 +19,9 @@ class UserInput extends React.Component {
       sinageCodes: '',
       Notes: '',
       Method: '',
+      formErrors: {customerID: ''},
+      customerIDVaild: false,
+	  formValid: false
     };  
 }
 
@@ -26,8 +30,36 @@ class UserInput extends React.Component {
 	onChange = (e) => {
         // Because we named the inputs to match their corresponding values in state, it's
         // super easy to update the state
-        this.setState({ [e.target.name]: e.target.value });
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]: value},
+        				() => { this.validateField(name, value) });
       }
+
+    validateField(fieldName, value) {
+	    let fieldValidationErrors = this.state.formErrors;
+	    let customerIDVaild = this.state.customerIDVaild;
+
+	    switch(fieldName) {
+	      case 'customerID':
+	        customerIDVaild = value.length >=1;
+	        fieldValidationErrors.customerID = customerIDVaild ? '' : ' requires more than 1 character';
+	        break;
+	      default:
+	        break;
+	    }
+    this.setState({formErrors: fieldValidationErrors,
+                    customerIDVaild: customerIDVaild,
+                  }, this.validateForm);
+  	}
+
+	validateForm() {
+    	this.setState({formValid: this.state.customerID});
+  	}
+
+  	errorClass(error) {
+    	return(error.length === 0 ? '' : 'has-error');
+  	}
 
 
  	resetName = (event) => {
@@ -58,33 +90,27 @@ onSubmit(e){
 	console.log('TFI INFORMATION', tfiInfo)
 	console.log('STATE', this.state);
 	axios.post(' http://localhost:3001/saveInfo/add', tfiInfo )
-	     .then(res => console.log('RESULTS', res.data));
-       
-      
-
-	      }
+	     .then(res => console.log('RESULTS', res.data)
+	     	
+	     )}
+	     
 	render() {
 		return(
-		 <Container>	
+		 <Container>
+
 			 <Form>
 			 	<Row>
-			 	 <Col md={{ size: 8}}>
-			        <FormGroup >
-		         		<Col sm={{size: 6}}>
-			          		<Input value={this.state.customerID} onChange={this.onChange} type="text" name="customerID"  placeholder="Customer ID" />
-			          	</Col>
-			        </FormGroup>
-		        </Col>
-			 	 <Col md={{ size: 8}}>
-			        <FormGroup >
-			        	<Col sm={{size: 6}} >
-			         		<Input value={this.state.companyName}  type="text" name="text"  placeholder="Company Name" disabled/>
-			         	</Col>
-		         		<Col sm={{size: 6}}>
+				 	 <Col  sm="4">
+				        <FormGroup >
 			          		<Input value={this.state.companyName} onChange={this.onChange} type="text" name="companyName"  placeholder="Company Name" />
-			          	</Col>
-			        </FormGroup>
-		        </Col>
+		          	  	</FormGroup>
+		          	  		</Col>
+		          	  	<FormGroup >
+		          			<Col  sm="8">
+				          		<Input invalid value={this.state.customerID} required  onChange={this.onChange} type="text" name="customerID"  placeholder="Customer ID" />
+				          		<FormErrors formErrors={this.state.formErrors} />	
+			      		 	</Col>
+	      		 		</FormGroup>
 		        </Row>
 			 </Form>
 			 	<Row>
@@ -125,7 +151,7 @@ onSubmit(e){
 			<Row>
 				<Col md={{size: 10, offset: 6}} sm={{size: 10, offset:6}}>
 					<div>
-				 		<Button className='submit_button' value='submit' outline color="success">Save Job</Button>{' '}
+				 		<Button className='submit_button' value='submit'  outline color="success">Save Job</Button>{' '}
 				 	</div>
 			 	</Col>
 		 	</Row>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Form, FormGroup, Input, Container, Row, Col, Label } from 'reactstrap';
+import {  Form, FormGroup, Input, Container, Row, Col } from 'reactstrap';
 import './Search.css'
 
 class Search extends React.Component {
@@ -52,13 +52,6 @@ class Search extends React.Component {
 					        <FormGroup className="SearchBar">
 					          <Input onChange={this.onChange.bind(this)} type="search" name="search" id="exampleSearch" placeholder="search" />
 							</FormGroup>
-							<FormGroup>
-					          <Label   for="exampleText" > {this.state.people.map(person => (
-						          <ul key={person.name}>
-						            <li>{person.name}</li>
-						          </ul>))}
-					          </Label>
-					        </FormGroup>
 						</Col>
 					</Row>
 		  		</Form>
