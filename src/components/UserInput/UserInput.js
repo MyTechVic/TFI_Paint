@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, Container, Row, Col,  FormFeedback, FormText,  } from 'reactstrap';
-import { FormErrors } from '../FormErrors/FormErrors';
+import { Button,  FormGroup, Label, Input, Container, Row, Col  } from 'reactstrap';
+import { AvForm, AvField } from 'availity-reactstrap-validation';
 import './UserInput.css'
 import axios from 'axios';
 
@@ -18,10 +18,7 @@ class UserInput extends React.Component {
       curtainCodes: '',
       sinageCodes: '',
       Notes: '',
-      Method: '',
-      formErrors: {customerID: ''},
-      customerIDVaild: false,
-	  formValid: false
+      Method: ''
     };  
 }
 
@@ -32,37 +29,10 @@ class UserInput extends React.Component {
         // super easy to update the state
         const name = e.target.name;
         const value = e.target.value;
-        this.setState({[name]: value},
-        				() => { this.validateField(name, value) });
+        this.setState({[name]: value})
       }
 
-    validateField(fieldName, value) {
-	    let fieldValidationErrors = this.state.formErrors;
-	    let customerIDVaild = this.state.customerIDVaild;
-
-	    switch(fieldName) {
-	      case 'customerID':
-	        customerIDVaild = value.length >=1;
-	        fieldValidationErrors.customerID = customerIDVaild ? '' : ' requires more than 1 character';
-	        break;
-	      default:
-	        break;
-	    }
-    this.setState({formErrors: fieldValidationErrors,
-                    customerIDVaild: customerIDVaild,
-                  }, this.validateForm);
-  	}
-
-	validateForm() {
-    	this.setState({formValid: this.state.customerID});
-  	}
-
-  	errorClass(error) {
-    	return(error.length === 0 ? '' : 'has-error');
-  	}
-
-
- 	resetName = (event) => {
+  	resetName = (event) => {
            	this.setState({
                 customerID:   '',
                 companyName:   '',
@@ -76,7 +46,7 @@ class UserInput extends React.Component {
     
 
 onSubmit(e){
-	e.preventDefault();
+	e.persist();
 	// get our form data out of state
 	const tfiInfo = { 
 		customerID: this.state.customerID,
@@ -96,31 +66,33 @@ onSubmit(e){
 	     
 	render() {
 		return(
-		 <Container>
-
-			 <Form>
-			 	<Row>
-				 	 <Col  sm="4">
+		 <Container> 
+	 		<AvForm  onSubmit={this.onSubmit}>
+	 		<Row>
+				 	 <Col  sm="3">
 				        <FormGroup >
 			          		<Input value={this.state.companyName} onChange={this.onChange} type="text" name="companyName"  placeholder="Company Name" />
 		          	  	</FormGroup>
 		          	  		</Col>
 		          	  	<FormGroup >
-		          			<Col  sm="8">
-				          		<Input invalid value={this.state.customerID} required  onChange={this.onChange} type="text" name="customerID"  placeholder="Customer ID" />
-				          		<FormErrors formErrors={this.state.formErrors} />	
+		          			<Col  sm="9">
+				          		<AvField  value={this.state.customerID} 
+				          		helpMessage='Customer ID must be unique and is required'
+				          		required  
+				          		onChange={this.onChange} 
+				          		type="text" 
+				          		name="customerID"  
+				          		placeholder="Customer ID" />
 			      		 	</Col>
 	      		 		</FormGroup>
 		        </Row>
-			 </Form>
-			 	<Row>
+		        	<Row>
 			 		<Col md={{size: 9, offset: 6}} sm={{size: 10, offset:6}}>
 				 		<div className="NewJobButton">
 		    				<Button className='New_button' outline color="info" onClick={this.resetName}>New Job</Button>{' '}
 				 		</div>
 			 		</Col>
 			 	</Row>
-	 		<Form onSubmit={this.onSubmit}>
 				 <Row>
 				 	 <Col md='6'>
 				        <FormGroup className='FormGroupsTfi'>
@@ -155,7 +127,7 @@ onSubmit(e){
 				 	</div>
 			 	</Col>
 		 	</Row>
-		 		</Form>
+		 		</AvForm>
 	 </Container>
 		    );
 		  }

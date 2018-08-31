@@ -31,8 +31,6 @@ class Search extends React.Component {
       .then(data => {
         if (this.token === token) {
           this.setState({ people: data.results });
-          console.log(data.results); 
-          console.log(data);
         }
       });
   };
