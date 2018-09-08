@@ -26,6 +26,7 @@ class Login extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+        console.log(e.target.value);
     }
 
     handleSubmit(e) {
@@ -35,16 +36,28 @@ class Login extends React.Component {
             password: this.state.password,
         }
         this.props.loginUser(user);
+        console.log(this.state.email);
+        console.log(this.state.password);
+        console.log('users', user);
+    }
+
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated) {
+            this.props.history.push('/');
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-
+        if(nextProps.auth.isAuthenticated) {
+            this.props.history.push('/')
+        }
         if(nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
             });
         }
     }
+
 
 
   render() {
@@ -96,11 +109,14 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    errors: state.errors
+    auth: state.auth,
+    errors: state.errorsloginUser
 })
 
 export  default connect(mapStateToProps, { loginUser })(Login)

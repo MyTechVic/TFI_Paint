@@ -38,17 +38,28 @@ class Register extends Component {
             password_confirm: this.state.password_confirm
         }
         this.props.registerUser(user, this.props.history);
-        console.log('user!', user);
-        console.log('History!', this.props.histroy);
-        console.log('Email!', this.state.email);
-        console.log('Password!', this.state.password);
+        console.log(this.state.name);
+        console.log(this.state.email);
+        console.log(this.state.password);
+        console.log(this.state.password_confirm);
+        console.log('history', this.props.history);
+      
     }
 
     componentWillReceiveProps(nextProps) {
+        if(nextProps.auth.isAuthenticated) {
+            this.props.history.push('/')
+        }
         if(nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
             });
+        }
+    }
+
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated) {
+            this.props.history.push('/');
         }
     }
 
@@ -123,9 +134,11 @@ class Register extends Component {
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     errors: state.errors
 });
 

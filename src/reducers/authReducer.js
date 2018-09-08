@@ -1,7 +1,7 @@
 // authReducer.js
 
 import { SET_CURRENT_USER } from '../actions/types';
-import isEmpty from '../../validation/is-empty';
+import isEmpty from '../is-empty';
 
 const initialState = {
     isAuthenticated: false,

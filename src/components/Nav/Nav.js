@@ -1,9 +1,21 @@
 import React from 'react';
 import { Button, Navbar, NavbarBrand, NavItem, NavLink, Nav } from 'reactstrap';
 import logo from './tfiLoog.png'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authentication.js';
+import { withRouter } from 'react-router-dom';
 
 class Navigation extends React.Component {
+  onLogout(e) {
+        e.preventDefault();
+        this.props.logoutUser(this.props.history);
+    }
+
   render() {
+	//const {isAuthenticated, user} = this.props.auth;
+	//const authLinks = {}
     return (
 	      <div>
         	<Navbar color="light" light expand="md">
@@ -18,4 +30,13 @@ class Navigation extends React.Component {
 	    );
 	  }
 }
-export default Navigation
+Navigation.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, { logoutUser })(withRouter(Navigation));
