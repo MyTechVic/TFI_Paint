@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Navbar, NavbarBrand, NavItem, NavLink, Nav } from 'reactstrap';
 import logo from './tfiLoog.png'
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authentication.js';

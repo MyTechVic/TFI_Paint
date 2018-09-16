@@ -43,7 +43,7 @@ class UserInput extends React.Component {
               });
         }
 
-    
+   
 
 onSubmit(e){
 	e.persist();
@@ -61,9 +61,7 @@ onSubmit(e){
 	console.log('STATE', this.state);
 	axios.post(' http://localhost:3001/saveInfo/add', tfiInfo )
 	     .then(res => console.log('RESULTS', res.data)
-	     	
 	     )}
-	     
 	render() {
 		return(
 		 <Container> 

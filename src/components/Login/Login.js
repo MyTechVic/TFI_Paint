@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Card, Container, Navbar, NavbarBrand,  } from 'reactstrap';
 import logo from './tfiLoog.png'
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authentication';
